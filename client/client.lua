@@ -328,8 +328,8 @@ end)
 AddEventHandler('onResourceStart', function(resource)
     Wait(1000)
     if GetCurrentResourceName() == resource then
-        HandleBlipVisibility()
-        SpawnClockInPed()        
+        SpawnClockInPed()  
+        HandleBlipVisibility()              
     end
 end)
 
