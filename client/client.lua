@@ -94,7 +94,7 @@ end
 
 local function SpawnClockInPed()
     LoadModel(Config.PedModel)
-    local clockInPed = CreatePed(4, Config.PedModel, Config.PedLocation.x, Config.PedLocation.y, Config.PedLocation.z, Config.PedLocation.w, false, true)
+    clockInPed = CreatePed(4, Config.PedModel, Config.PedLocation.x, Config.PedLocation.y, Config.PedLocation.z, Config.PedLocation.w, false, true)
     FreezeEntityPosition(clockInPed, true)
     SetEntityInvincible(clockInPed, true)
     SetBlockingOfNonTemporaryEvents(clockInPed, true)
