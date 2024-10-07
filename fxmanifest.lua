@@ -17,8 +17,9 @@ server_scripts {
 shared_scripts {
     '@ox_lib/init.lua',
     '@qbx_core/modules/lib.lua',
-	'@qbx_core/shared/locale.lua',
+	-- '@qbx_core/shared/locale.lua',
     'config/*.lua',
 }
 
 lua54 'yes'
+use_experimental_fxv2_oal 'yes'

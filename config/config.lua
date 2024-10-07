@@ -2,7 +2,7 @@ Config = {}
 
 Config.Debug = false
 
-Config.Job = 'delivery' -- set the job you want to lock this to.
+Config.Job = 'delivery'
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
 Config.VehicleModel = `boxville2`
 Config.VehicleSpawn = vec4(62.22, 122.08, 79.06, 158.02)

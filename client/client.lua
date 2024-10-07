@@ -1,3 +1,4 @@
+local isPlayerLoggedIn =  LocalPlayer.state.isLoggedIn
 local isDelivering = false
 local spawnedVehicle = nil
 local currentDeliveryLocation = nil
@@ -41,14 +42,6 @@ local function HandleBlipVisibility()
 end
 
 -- HandleBlipVisibility()
-
-RegisterNetEvent('QBCore:Client:OnJobUpdate', function()
-    HandleBlipVisibility()
-end)
-
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    HandleBlipVisibility()
-end)
 
 local SpawnDeliveryPed, DeliverPackage
 
@@ -106,7 +99,6 @@ local function SpawnClockInPed()
     SetEntityInvincible(clockInPed, true)
     SetBlockingOfNonTemporaryEvents(clockInPed, true)
     UpdateTargetOptions(clockInPed)
-
 end
 
 local function GetNextDeliveryLocation()
@@ -325,12 +317,27 @@ AddEventHandler('vg_delivery:client:clockOut', function()
     deliveryInProgress = false
 end)
 
-AddEventHandler('onResourceStart', function(resource)
-    Wait(1000)
-    if GetCurrentResourceName() == resource then
-        SpawnClockInPed()  
-        HandleBlipVisibility()              
-    end
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    isPlayerLoggedIn = false
 end)
 
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function()
+    HandleBlipVisibility()
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    isPlayerLoggedIn = true
+    HandleBlipVisibility()
+end)
+
+
+AddEventHandler('onResourceStart', function(resource)
+    if resource ~= GetCurrentResourceName() then return end
+  
+    if not isPlayerLoggedIn then return end   
+    print('Player is logged in and should spwan the ped')
+    SpawnClockInPed()  
+    HandleBlipVisibility()  
+   
+end)
 
